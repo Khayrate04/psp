@@ -1,0 +1,8 @@
+{
+  "name": "SaaS Product Landing Page",
+  "description": "A high-fidelity, interactive, and modern dark-themed landing page for Pulse AI, an advanced SaaS product design platform featuring real-time collaborative workspace mockups, a responsive feature playground, and dynamic bento-grid showcases.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
