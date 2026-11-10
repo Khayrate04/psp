@@ -5,16 +5,19 @@ import {
   Users, 
   Download, 
   Search, 
-  Smartphone, 
-  Apple, 
   ArrowDownToLine, 
   Check, 
   X, 
-  ExternalLink,
-  ShieldCheck,
-  Flame,
-  Star
+  Flame
 } from 'lucide-react';
+
+// Bundle static image assets via Vite so they resolve reliably in both dev and production
+import iconBaseball9 from './assets/images/icon_baseball9_1794315153853.jpg';
+import iconHajimeIppo from './assets/images/ippo_game_hero_1794158473081.jpg';
+import iconNoomiClone from './assets/images/icon_noomiclone_1794315765749.jpg';
+import iconSpeedStars from './assets/images/icon_speedstars_1794315155724.jpg';
+import iconTomodachi from './assets/images/icon_tomodachi_1794315765595.jpg';
+import iconYandere from './assets/images/icon_yandere_1794315156538.jpg';
 
 interface ModItem {
   id: string;
@@ -24,6 +27,7 @@ interface ModItem {
   size: string;
   version: string;
   image: string;
+  fallbackImage: string;
   modBadge: string;
   isFeatured?: boolean;
   link?: string;
@@ -38,7 +42,8 @@ const MOD_ITEMS: ModItem[] = [
     downloads: '4.5M+',
     size: '185 MB',
     version: 'v3.2.1',
-    image: '/src/assets/images/icon_baseball9_1794315153853.jpg',
+    image: iconBaseball9,
+    fallbackImage: '/images/icon_baseball9_1794315153853.jpg',
     modBadge: 'MOD',
     link: 'https://apptrck.net/cl/i/82lj8k',
     features: ['Unlimited Gems & Coins', 'Max Stamina', 'Unlocked All Players']
@@ -50,7 +55,8 @@ const MOD_ITEMS: ModItem[] = [
     downloads: '1.4M+',
     size: '600 MB',
     version: 'v2.4.0 HD',
-    image: '/src/assets/images/ippo_game_hero_1794158473081.jpg',
+    image: iconHajimeIppo,
+    fallbackImage: '/images/ippo_game_hero_1794158473081.jpg',
     modBadge: 'MOD',
     isFeatured: true,
     link: 'https://apptrck.net/cl/i/82lj8k',
@@ -63,7 +69,8 @@ const MOD_ITEMS: ModItem[] = [
     downloads: '1.8M+',
     size: '95 MB',
     version: 'v1.0.8',
-    image: '/src/assets/images/ippo_training_arcade_1794158474072.jpg',
+    image: iconNoomiClone,
+    fallbackImage: '/images/icon_noomiclone_1794315765749.jpg',
     modBadge: 'MOD',
     link: 'https://apptrck.net/cl/i/82lj8k',
     features: ['Unlocked Premium Levels', 'No Ads', 'Instant Respawn']
@@ -75,7 +82,8 @@ const MOD_ITEMS: ModItem[] = [
     downloads: '3.1M+',
     size: '120 MB',
     version: 'v2.1.0',
-    image: '/src/assets/images/icon_speedstars_1794315155724.jpg',
+    image: iconSpeedStars,
+    fallbackImage: '/images/icon_speedstars_1794315155724.jpg',
     modBadge: 'MOD',
     link: 'https://apptrck.net/cl/i/82lj8k',
     features: ['Max Speed Multiplier', 'All Athletics Outfits Unlocked', 'Infinite Energy']
@@ -87,7 +95,8 @@ const MOD_ITEMS: ModItem[] = [
     downloads: '2.7M+',
     size: '450 MB',
     version: 'v1.5.2',
-    image: '/src/assets/images/ippo_takamura_heavyweight_1794158475517.jpg',
+    image: iconTomodachi,
+    fallbackImage: '/images/icon_tomodachi_1794315765595.jpg',
     modBadge: 'MOD',
     link: 'https://apptrck.net/cl/i/82lj8k',
     features: ['Infinite Money & Gifts', 'Special Island Islands Pack', 'Custom Apartments']
@@ -99,7 +108,8 @@ const MOD_ITEMS: ModItem[] = [
     downloads: '2.5M+',
     size: '720 MB',
     version: 'v2024.10',
-    image: '/src/assets/images/icon_yandere_1794315156538.jpg',
+    image: iconYandere,
+    fallbackImage: '/images/icon_yandere_1794315156538.jpg',
     modBadge: 'MOD',
     link: 'https://apptrck.net/cl/i/82lj8k',
     features: ['Unlocked All Elimination Modes', 'Full Customization Wardrobe', 'Developer Menu Enabled']
@@ -193,7 +203,14 @@ export default function App() {
                 <img 
                   src={mod.image} 
                   alt={mod.name}
+                  onError={(e) => {
+                    const target = e.currentTarget;
+                    if (target.src !== mod.fallbackImage) {
+                      target.src = mod.fallbackImage;
+                    }
+                  }}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  loading="lazy"
                   referrerPolicy="no-referrer"
                 />
 
@@ -214,12 +231,12 @@ export default function App() {
               <div className="flex items-center justify-center gap-1.5 text-[11px] text-neutral-400 font-mono w-full mt-1">
                 
                 {/* Android Icon (SVG) */}
-                <svg className="w-3.5 h-3.5 fill-current text-neutral-400" viewBox="0 0 24 24">
+                <svg className="w-3.5 h-3.5 fill-current text-neutral-400 shrink-0" viewBox="0 0 24 24">
                   <path d="M17.523 15.3414c-.5511 0-.9993-.4486-.9993-1.0002s.4482-1.0002.9993-1.0002c.5511 0 .9993.4486.9993 1.0002s-.4482 1.0002-.9993 1.0002m-11.046 0c-.5511 0-.9993-.4486-.9993-1.0002s.4482-1.0002.9993-1.0002c.5511 0 .9993.4486.9993 1.0002s-.4482 1.0002-.9993 1.0002m11.4045-6.02l1.9973-3.4592a.416.416 0 00-.1521-.5676.416.416 0 00-.5676.1521l-2.0223 3.503C15.589 8.3582 13.844 8 12 8s-3.589.3582-5.1378.9507L4.8399 5.4477a.416.416 0 00-.5676-.1521.416.416 0 00-.1521.5676l1.9973 3.4592C2.6889 10.7964 0 14.1513 0 18h24c0-3.8487-2.6889-7.2036-6.1185-8.6786"/>
                 </svg>
 
                 {/* Apple Icon (SVG) */}
-                <svg className="w-3.5 h-3.5 fill-current text-neutral-400" viewBox="0 0 24 24">
+                <svg className="w-3.5 h-3.5 fill-current text-neutral-400 shrink-0" viewBox="0 0 24 24">
                   <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.63-.78 1.06-1.87.94-2.97-1 .04-2.13.68-2.78 1.46-.57.67-.99 1.77-.85 2.84 1.12.09 2.06-.55 2.69-1.33z"/>
                 </svg>
 
@@ -260,6 +277,12 @@ export default function App() {
                 <img 
                   src={selectedMod.image} 
                   alt={selectedMod.name}
+                  onError={(e) => {
+                    const target = e.currentTarget;
+                    if (target.src !== selectedMod.fallbackImage) {
+                      target.src = selectedMod.fallbackImage;
+                    }
+                  }}
                   className="w-full h-full object-cover"
                 />
               </div>
