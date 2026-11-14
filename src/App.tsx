@@ -8,8 +8,7 @@ import {
   Flame, 
   Star, 
   ShieldCheck, 
-  Zap,
-  ChevronRight
+  Zap
 } from 'lucide-react';
 
 // Bundle static image assets via Vite so they resolve reliably in both dev and production
@@ -19,6 +18,7 @@ import iconNoomiClone from './assets/images/icon_noomiclone_1794315765749.jpg';
 import iconSpeedStars from './assets/images/icon_speedstars_1794315155724.jpg';
 import iconTomodachi from './assets/images/icon_tomodachi_1794315765595.jpg';
 import iconYandere from './assets/images/icon_yandere_1794315156538.jpg';
+import iconNba2k27 from './assets/images/icon_nba2k27_1794663742419.jpg';
 
 interface GameItem {
   id: string;
@@ -57,6 +57,27 @@ const GAMES_LIST: GameItem[] = [
       'All 48 Boxers & Ring Arenas Unlocked',
       'Full HD English Translation Patch',
       'Plug & Play Controller Support (Xbox / PS)'
+    ]
+  },
+  {
+    id: 'nba-2k27-mod',
+    name: 'NBA 2K27 MOD',
+    tagline: 'Unlimited VC · 2027 Rosters & 60 FPS Pro Court',
+    category: 'Sports / Basketball',
+    downloads: '3.9M+',
+    rating: '4.9',
+    size: '1.2 GB',
+    version: 'v27.1.0 MOD',
+    image: iconNba2k27,
+    fallbackImage: '/images/icon_nba2k27_1794663742419.jpg',
+    badge: 'NEW MOD',
+    isFeatured: true,
+    link: 'https://apptrck.net/cl/i/82lj8k',
+    features: [
+      'Unlimited VC & MyTEAM Points',
+      '2026–2027 Updated Rosters & Jerseys',
+      'MyCAREER Max Badges & 99 OVR Unlocker',
+      '60 FPS Smooth Gameplay & Controller Ready'
     ]
   },
   {
@@ -287,6 +308,17 @@ export default function App() {
 
             </div>
           ))}
+          {filteredGames.length === 0 && (
+            <div className="bg-[#0f1322] border border-slate-800 rounded-2xl p-8 text-center">
+              <p className="text-sm font-medium text-slate-300">No games matched "{searchQuery}"</p>
+              <button
+                onClick={() => setSearchQuery('')}
+                className="mt-3 px-4 py-2 text-xs font-semibold text-black bg-emerald-400 hover:bg-emerald-300 rounded-xl transition-colors cursor-pointer"
+              >
+                Show all games
+              </button>
+            </div>
+          )}
         </div>
 
       </main>
@@ -311,7 +343,14 @@ export default function App() {
                 <img 
                   src={selectedGame.image} 
                   alt={selectedGame.name}
+                  onError={(e) => {
+                    const target = e.currentTarget;
+                    if (target.src !== selectedGame.fallbackImage) {
+                      target.src = selectedGame.fallbackImage;
+                    }
+                  }}
                   className="w-full h-full object-cover"
+                  referrerPolicy="no-referrer"
                 />
               </div>
 
