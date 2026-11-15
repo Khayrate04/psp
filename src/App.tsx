@@ -19,6 +19,7 @@ import iconSpeedStars from './assets/images/icon_speedstars_1794315155724.jpg';
 import iconTomodachi from './assets/images/icon_tomodachi_1794315765595.jpg';
 import iconYandere from './assets/images/icon_yandere_1794315156538.jpg';
 import iconNba2k27 from './assets/images/icon_nba2k27_1794663742419.jpg';
+import iconOnesBasketball from './assets/images/icon_ones_basketball_1794745132496.jpg';
 
 interface GameItem {
   id: string;
@@ -78,6 +79,27 @@ const GAMES_LIST: GameItem[] = [
       '2026–2027 Updated Rosters & Jerseys',
       'MyCAREER Max Badges & 99 OVR Unlocker',
       '60 FPS Smooth Gameplay & Controller Ready'
+    ]
+  },
+  {
+    id: 'ones-1vs1-basketball',
+    name: 'ONES: 1vs1 Basketball',
+    tagline: 'Streetball 1v1 Duels · Unlocked All Ballers & Courts',
+    category: 'Sports / Basketball',
+    downloads: '2.1M+',
+    rating: '4.9',
+    size: '240 MB',
+    version: 'v1.9.4 MOD',
+    image: iconOnesBasketball,
+    fallbackImage: '/images/icon_ones_basketball_1794745132496.jpg',
+    badge: 'NEW MOD',
+    isFeatured: true,
+    link: 'https://apptrck.net/cl/i/82lj8k',
+    features: [
+      'Unlimited Cash, Gems & Skill Upgrades',
+      'All Streetball Courts & Ballers Unlocked',
+      'Max Ankle-Breaker & Dunk Boost',
+      'Ad-Free 60 FPS Competitive Matches'
     ]
   },
   {
